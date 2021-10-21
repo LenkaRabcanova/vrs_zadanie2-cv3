@@ -64,27 +64,22 @@ int main(void)
   GPIOA_PUPDR_REG &= ~(1 << 7); //input is  01 (76) Pull-up
   GPIOA_PUPDR_REG |= (1 << 6);
 
-
+  enum EDGE_TYPE edge;
+  int actual_state = 0;
+  int samples = 5;
   while (1)
   {
-	  if(BUTTON_GET_STATE)
-	  {
-		  // 0.25s delay
-		  LL_mDelay(250);
-		  LED_ON;
-		  // 0.25s delay
-		  LL_mDelay(250);
-		  LED_OFF;
-	  }
-	  else
-	  {
-		  // 1s delay
-		  LL_mDelay(1000);
-		  LED_ON;
-		  // 1s delay
-		  LL_mDelay(1000);
-		  LED_OFF;
-	  }
+	  edge = edgeDetect(actual_state, samples);
+
+	  actual_state = BUTTON_GET_STATE;
+	  if (edge==RISE)
+			  {
+			  LED_ON;
+			  }
+	   if (edge==FALL)
+			   {
+			  LED_OFF;
+               }
   }
 
 }
@@ -103,6 +98,13 @@ void Error_Handler(void)
   /* User can add his own implementation to report the HAL error return state */
 
   /* USER CODE END Error_Handler_Debug */
+}
+
+enum EDGE_TYPE edgeDetect(uint8_t pin_state, uint8_t samples) {
+	if (BUTTON_GET_STATE == 0)
+
+	else
+
 }
 
 #ifdef  USE_FULL_ASSERT

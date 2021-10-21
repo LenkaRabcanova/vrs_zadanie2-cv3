@@ -61,8 +61,8 @@ all: main-build
 main-build: vrs_cv2_ll_programming.elf secondary-outputs
 
 # Tool invocations
-vrs_cv2_ll_programming.elf: $(OBJS) $(USER_OBJS) C:\Users\user\Documents\vrs\zad1\STM32F303K8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "vrs_cv2_ll_programming.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\user\Documents\vrs\zad1\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="vrs_cv2_ll_programming.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+vrs_cv2_ll_programming.elf: $(OBJS) $(USER_OBJS) C:\Users\user\Documents\vrs\zad2\STM32F303K8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "vrs_cv2_ll_programming.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\user\Documents\vrs\zad2\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="vrs_cv2_ll_programming.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
