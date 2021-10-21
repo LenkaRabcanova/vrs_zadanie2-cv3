@@ -66,19 +66,22 @@ int main(void)
 
   enum EDGE_TYPE edge;
   int actual_state = 0;
-  int samples = 5;
+  int samples = 8;
+  int led_state=0;
   while (1)
   {
 	  edge = edgeDetect(actual_state, samples);
 
 	  actual_state = BUTTON_GET_STATE;
-	  if (edge==RISE)
+	  if ((edge==RISE) && (led_state==0))
 			  {
 			  LED_ON;
+			  led_state=1;
 			  }
-	   if (edge==FALL)
+	  else if((edge==RISE) && (led_state==1))
 			   {
 			  LED_OFF;
+			  led_state=0;
                }
   }
 
@@ -101,9 +104,21 @@ void Error_Handler(void)
 }
 
 enum EDGE_TYPE edgeDetect(uint8_t pin_state, uint8_t samples) {
-	if (BUTTON_GET_STATE == 0)
 
+	int x=0;
+
+	if ((BUTTON_GET_STATE == 1) && (pin_state==0)){
+
+	for(int i=0;i<samples;i++){
+		if(BUTTON_GET_STATE != pin_state)
+			x++;
+		LL_mDelay(250);
+	}
+	if (x==samples)
+		return RISE;
+}
 	else
+		return NONE;
 
 }
 

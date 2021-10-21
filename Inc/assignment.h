@@ -43,12 +43,12 @@
 #define	RCC_AHBENR_REG			*((volatile uint32_t *)(RCC_BASE_ADDR + 0x00000014U))
 
 /* LED and button macros */
-#define LED_ON					GPIOA_BSRR_REG |= (1 << 3)
-#define LED_OFF					GPIOA_BRR_REG |= (1 << 3)
+#define LED_ON					GPIOA_BSRR_REG |= (1 << 4)
+#define LED_OFF					GPIOA_BRR_REG |= (1 << 4)
 
-#define BUTTON_GET_STATE		!(GPIOA_IDR_REG & (1 << 4))
+#define BUTTON_GET_STATE		!(GPIOA_IDR_REG & (1 << 3))
 
 enum EDGE_TYPE  {NONE = 0, RISE = 1, FALL = 2};
-EDGE_TYPE edgeDetect(uint8_t pin_state, uint8_t samples);
+enum EDGE_TYPE edgeDetect(uint8_t pin_state, uint8_t samples);
 
 #endif /* ASSIGNMENT_H_ */
